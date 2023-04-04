@@ -1,17 +1,18 @@
-var video;
-var slowDownCount = 0;
+var video = document.querySelector("#player1")
+
 
 
 window.addEventListener("load", function() {
 	console.log("Good job opening the window")
-	video = document.querySelector("#player1")
-    video.load()
+	video.loop=false;
+	video.autoplay=false;
 });
 
 document.querySelector("#play").addEventListener("click", function() {
+	video.play()
     console.log("Play Video");
 	document.querySelector("#volume").innerHTML = video.volume *100 + "%"
-	video.play()
+
 
 });
 
@@ -22,21 +23,14 @@ document.querySelector("#pause").addEventListener("click",function() {
 
 document.querySelector("#slower").addEventListener("click", function() {
 	console.log("Slow down video");
-	video.playbackRate -= 0.1;
+	video.playbackRate = video.playbackRate*0.9;
 	console.log("New speed: " + video.playbackRate);
 });
 
 document.querySelector("#faster").addEventListener("click", function() {
 	console.log("Speed up video");
-	if (slowDownCount > 0) {
-		var newPlaybackRate = video.playbackRate / Math.pow(0.9, slowDownCount);
-		video.playbackRate = newPlaybackRate;
-		console.log("New speed: " + newPlaybackRate);
-		slowDownCount = 0;
-	} else {
-		video.playbackRate += 0.1;
-		console.log("New speed: " + video.playbackRate);
-	}
+	video.playbackRate = video.playbackRate/0.9;
+	console.log("New speed: " + video.playbackRate);
 });
 
 document.querySelector("#skip").addEventListener("click", function() {
